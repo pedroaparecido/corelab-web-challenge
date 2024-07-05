@@ -1,13 +1,19 @@
 @import '../../styles/break-points.scss';
 
 .Vehicles {
-  display: grid;
-  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  align-items: right;
+  width: 100%;
+  background-color: rgb(239, 255, 250);
 
   .main {
     display: grid;
-    gap: 1rem;
-    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+    height: 350px;
   }
 
   @include tablet {
