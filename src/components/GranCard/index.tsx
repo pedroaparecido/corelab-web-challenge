@@ -60,12 +60,14 @@ const GranCard = (props: IGranCard) => {
 
   return (
     <div className={styles.GranCard}>
+              <IconeStar onClick={() => {
+                setEditMode(!editMode)
+              }}
+              state={editMode}
+            />
       <form onSubmit={handleSubmit(handlePatchData)}>
         <div className={styles.div1}>
           <input type="text" placeholder={props.title} {...register('title')} name="title" />
-            <IconeStar onClick={function (): void {
-            throw new Error("Function not implemented.");
-          } } />
         </div>
         <textarea typeof="text" placeholder={props.body} {...register('body')} name="body" />
         </form>
@@ -74,9 +76,7 @@ const GranCard = (props: IGranCard) => {
             <IconeEdit onClick={function (): void {
             throw new Error("Function not implemented.");
           } } />
-            <IconeColor onClick={function (): void {
-            throw new Error("Function not implemented.");
-          } } />
+            <IconeColor onClick={() => {}} />
           </div>
           <div>
             <IconeClose onClick={() => {handleDel()}} />

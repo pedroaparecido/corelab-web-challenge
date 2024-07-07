@@ -10,6 +10,7 @@
   background-color: white;
   display: flex;
   flex-direction: column;
+  align-items: end;
 
   .div1 {
     display: flex;
@@ -60,5 +61,11 @@
 
   .Icone {
     cursor: pointer;
+  }
+
+  .div4 {
+    height: 50px;
+    width: 50px;
+    background-color: yellow;
   }
 }

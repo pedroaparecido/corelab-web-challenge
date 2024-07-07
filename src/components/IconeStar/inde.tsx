@@ -5,12 +5,13 @@ import { AiFillStar } from "react-icons/ai";
 
 interface IIcone {
     onClick: () => void,
+    state: Boolean
 }
   
   const IconeStar = (props: IIcone) => {
     return (
         <button onClick={props.onClick} className={styles.Icone}>
-            <AiFillStar />
+            <AiFillStar style={ props.state ? { color: 'yellow' } : { color: 'black' }} />
         </button>
     )
   };
