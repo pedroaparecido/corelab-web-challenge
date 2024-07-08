@@ -5,7 +5,9 @@ const Insert = async (body) => {
 }
 
 const Get = async () => {
-    return await AnoMod.find()
+    return await AnoMod.find().sort({
+        fav: -1,
+    })
 }
 
 const Patch = async (body) => {
@@ -14,7 +16,8 @@ const Patch = async (body) => {
     },
     {
         title: body.title,
-        body: body.body
+        body: body.body,
+        fav: body.fav
     },
 {
     new: true

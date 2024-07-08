@@ -40,7 +40,7 @@ const VehiclesPage = () => {
           <main className={styles.main}>
             {
               data?.map((item: any) =>
-              <GranCard title={item.title} body={item.body} key={item._id} id={item._id} />
+              <GranCard title={item.title} body={item.body} key={item._id} id={item._id} fav={item.fav} />
               )
             }
           </main>

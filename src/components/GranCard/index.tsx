@@ -18,7 +18,8 @@ import IconeClose from "../IconeClose/inde";
 interface IGranCard {
   title: string,
   body: string,
-  id: string
+  id: string,
+  fav: boolean
 }
 
 const fetcher = (url: string)  => axios.get(url).then((res) => res.data)
@@ -31,24 +32,47 @@ const GranCard = (props: IGranCard) => {
   const [editedBody, setEditedBody] = useState(props.body);
   const { register, handleSubmit } = useForm()
 
-  const handleEditClick = () => {
-    setEditMode(true);
+  const handleEditClick = async () => {
+    setEditMode(!editMode)
+    if (editMode) {
+      const response = await axios.patch(`http://localhost:3003/patch/${props.id}`, {
+        title: data.title,
+        body: data.body,
+        id: props.id,
+        fav: editMode
+      });
+    }
   };
 
   const { data } = useSWR('http://localhost:3003/get', fetcher)
 
   // Função para enviar as alterações ao servidor (PATCH)
   const handlePatchData = async (data: FieldValues) => {
-    try {
-      const response = await axios.patch(`http://localhost:3003/patch/${props.id}`, {
-        title: data.title,
-        body: data.body,
-        id: props.id
-      });
-      console.log('Dados atualizados:', response.data);
-      setEditMode(false); // Finaliza o modo de edição após o PATCH
-    } catch (error) {
-      console.error('Erro ao atualizar os dados:', error);
+    if (editMode) {
+      try {
+        const response = await axios.patch(`http://localhost:3003/patch/${props.id}`, {
+          title: data.title,
+          body: data.body,
+          id: props.id,
+          fav: editMode
+        });
+        console.log('Dados atualizados:', response.data);
+        setEditMode(false); // Finaliza o modo de edição após o PATCH
+      } catch (error) {
+        console.error('Erro ao atualizar os dados:', error);
+      }
+    } else {
+      try {
+        const response = await axios.patch(`http://localhost:3003/patch/${props.id}`, {
+          title: data.title,
+          body: data.body,
+          id: props.id,
+        });
+        console.log('Dados atualizados:', response.data);
+        setEditMode(false); // Finaliza o modo de edição após o PATCH
+      } catch (error) {
+        console.error('Erro ao atualizar os dados:', error);
+      }
     }
   }
 
@@ -61,9 +85,9 @@ const GranCard = (props: IGranCard) => {
   return (
     <div className={styles.GranCard}>
               <IconeStar onClick={() => {
-                setEditMode(!editMode)
+                handleEditClick()
               }}
-              state={editMode}
+              state={props.fav}
             />
       <form onSubmit={handleSubmit(handlePatchData)}>
         <div className={styles.div1}>
