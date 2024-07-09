@@ -30,7 +30,7 @@ const App = () => {
           <form onSubmit={handleSubmit(handleWrite)}>
             <div className={styles.div1}>
               <input type="text" placeholder="Título" {...register('title')} name="title" />
-              <input className={styles.textarea} typeof="text" placeholder="Clique ou arraste o arquivopara esta área para fazer upload" {...register('body')} name="body" />
+              <textarea className={styles.textarea} typeof="text" placeholder="Clique ou arraste o arquivopara esta área para fazer upload" {...register('body')} name="body" />
             </div>
           </form>
           <main className={styles.main}>

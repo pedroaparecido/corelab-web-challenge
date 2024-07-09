@@ -28,11 +28,7 @@ const colors = ['#ec9679', '#9fec79', '#79b3ec', "white"]
 const fetcher = (url: string)  => axios.get(url).then((res) => res.data)
 
 const GranCard = (props: IGranCard) => {
-  const [stateColor , setStateColor] = useState(false)
   const [editMode, setEditMode] = useState(false);
-  const [editedTitle, setEditedTitle] = useState(props.title);
-  const [editedId, setEdtedId] = useState(props.id);
-  const [editedBody, setEditedBody] = useState(props.body);
   const { register, handleSubmit } = useForm()
 
   const handleEditClick = async () => {
@@ -51,7 +47,6 @@ const GranCard = (props: IGranCard) => {
 
   // Função para enviar as alterações ao servidor (PATCH)
   const handlePatchData = async (data: FieldValues) => {
-    if (editMode) {
       try {
         const response = await axios.patch(`http://localhost:3003/patch/${props.id}`, {
           title: data.title,
@@ -59,29 +54,13 @@ const GranCard = (props: IGranCard) => {
           id: props.id,
           fav: editMode
         });
-        console.log('Dados atualizados:', response.data);
-        setEditMode(false); // Finaliza o modo de edição após o PATCH
       } catch (error) {
         console.error('Erro ao atualizar os dados:', error);
       }
-    } else {
-      try {
-        const response = await axios.patch(`http://localhost:3003/patch/${props.id}`, {
-          title: data.title,
-          body: data.body,
-          id: props.id,
-        });
-        console.log('Dados atualizados:', response.data);
-        setEditMode(false); // Finaliza o modo de edição após o PATCH
-      } catch (error) {
-        console.error('Erro ao atualizar os dados:', error);
-      }
-    }
   }
 
   const handleDel = async () => {
     const response = await axios.delete(`http://localhost:3003/delete/${props.id}`)
-    //console.log(response)
   }
 
   const setColor = (color: string) => {
@@ -106,7 +85,7 @@ const setTheme = (event: React.MouseEvent<HTMLDivElement>) => {
         <div className={styles.div1}>
           <input type="text" placeholder={props.title} {...register('title')} name="title" />
         </div>
-        <input className={styles.textarea} type="text" placeholder={props.body} {...register('body')} name="body" />
+        <textarea className={styles.textarea} typeof="text" placeholder={props.body} {...register('body')} name="body" />
         </form>
         <div className={styles.div2}>
           <div className={styles.div3}>

@@ -15,9 +15,9 @@ const Patch = async (body) => {
         _id: body.id
     },
     {
-        title: null || body.title,
-        body: null || body.body,
-        fav: null || body.fav
+        title: body.title,
+        body: body.body,
+        fav: body.fav
     },
 {
     new: true
