@@ -3,7 +3,7 @@ import styles from './Navbar.module.scss'
 interface INavbar {
     placeholder: string;
     value: string;
-    onChange: () => void;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   }
   
   const Navbar = (props: INavbar) => {

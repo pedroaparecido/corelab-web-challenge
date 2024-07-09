@@ -12,7 +12,9 @@
   flex-direction: column;
   align-items: end;
 
-  
+  .selected {
+    background-color: var(--bg-color);
+  }
 
   .div1 {
     display: flex;
@@ -70,4 +72,9 @@
     width: 50px;
     background-color: yellow;
   }
+
+  .list {
+    display: flex;
+    gap: 1rem;
+}
 }

@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from "react";
 import styles from "./Card.module.scss";
-import Icone from "../IconeStar/inde";
+import Icone from "../IconeStar";
 
 import { AiFillStar } from "react-icons/ai";
 import { AiFillEdit } from "react-icons/ai";
@@ -10,10 +10,11 @@ import { AiOutlineClose } from "react-icons/ai";
 import useSWR from "swr";
 import axios from "axios";
 import { FieldValue, FieldValues, useForm } from "react-hook-form";
-import IconeStar from "../IconeStar/inde";
-import IconeEdit from "../IconeEdit/inde";
-import IconeColor from "../IconeColor/inde";
-import IconeClose from "../IconeClose/inde";
+import IconeStar from "../IconeStar/index";
+import IconeEdit from "../IconeEdit/index";
+import IconeColor from "../IconeColor/index";
+import IconeClose from "../IconeClose/index";
+import ColorItem from "../Color/index";
 
 interface IGranCard {
   title: string,
@@ -21,6 +22,8 @@ interface IGranCard {
   id: string,
   fav: boolean
 }
+
+const colors = ['#ec9679', '#9fec79', '#79b3ec', "white"]
 
 const fetcher = (url: string)  => axios.get(url).then((res) => res.data)
 
@@ -82,6 +85,17 @@ const GranCard = (props: IGranCard) => {
     //console.log(response)
   }
 
+  const setColor = (color: string) => {
+    document.documentElement.style.setProperty('--bg-color', color)
+}
+
+const setTheme = (event: React.MouseEvent<HTMLDivElement>) => {
+  const target = event.target as HTMLElement
+  const currentColor = window.getComputedStyle(target).getPropertyValue('--bg-color')
+  console.log(currentColor);
+}
+
+
   return (
     <div className={styles.GranCard}>
               <IconeStar onClick={() => {
@@ -93,14 +107,21 @@ const GranCard = (props: IGranCard) => {
         <div className={styles.div1}>
           <input type="text" placeholder={props.title} {...register('title')} name="title" />
         </div>
-        <textarea typeof="text" placeholder={props.body} {...register('body')} name="body" />
+        <input className={styles.textarea} type="text" placeholder={props.body} {...register('body')} name="body" />
         </form>
         <div className={styles.div2}>
           <div className={styles.div3}>
             <IconeEdit onClick={function (): void {
             throw new Error("Function not implemented.");
           } } />
-            <IconeColor onClick={() => {}} />
+            <IconeColor id={props.id} onClick={() => {}} >
+              <div className={styles.list}>
+                {colors.map((color, idx) => 
+                  <ColorItem id={props.id} key={idx} color={color} setColor={setColor} />
+                )}
+      </div>
+      <AiOutlineBgColors />
+            </IconeColor>
           </div>
           <div>
             <IconeClose onClick={() => {handleDel()}} />
