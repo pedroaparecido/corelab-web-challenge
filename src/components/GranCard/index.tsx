@@ -80,7 +80,6 @@ const GranCard = (props: IGranCard) => {
   }
 
   const handleDel = async () => {
-    console.log('aqui')
     const response = await axios.delete(`http://localhost:3003/delete/${props.id}`)
     //console.log(response)
   }
