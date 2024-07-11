@@ -2,6 +2,7 @@
 
  - clone o repositório;
  - clone o repositório do api-challenge
+ - escreva o diretório do api-challenge no package.json dentro do script dev
  - instale o npm;
  - dentro do diretório rode no terminal npm i;
  - dentro do diretório rode no terminal npm run client.
