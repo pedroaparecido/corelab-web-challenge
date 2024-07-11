@@ -34,7 +34,7 @@
   },
   "scripts": {
     "client": "concurrently \"npm run dev\" \"npm start\"",
-    "dev": "nodemon ./src/pages/api/app.cjs",
+    "dev": "nodemon ../../desafio-corelab-backend/corelab-api-challenge/server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -1,6 +1,7 @@
 ### Iniciando projeto:
 
  - clone o repositório;
+ - clone o repositório do api-challenge
  - instale o npm;
  - dentro do diretório rode no terminal npm i;
  - dentro do diretório rode no terminal npm run client.
